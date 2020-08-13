@@ -30,7 +30,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.isActive(), true,
                 true, true,
                 getAuthorities("USER"));
-
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {
