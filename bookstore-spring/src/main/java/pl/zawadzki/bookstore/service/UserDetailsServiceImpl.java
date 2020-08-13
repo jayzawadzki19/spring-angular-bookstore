@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.getUsername(), user.getPassword(),
                 user.isActive(), true,
                 true, true,
-                getAuthorities("USER"));
+                getAuthorities("ROLE_USER"));
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {
