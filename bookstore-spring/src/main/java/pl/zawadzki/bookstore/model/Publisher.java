@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 @Data
 @Entity
@@ -15,7 +16,7 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "publishers")
-public class Publisher {
+public class Publisher implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
