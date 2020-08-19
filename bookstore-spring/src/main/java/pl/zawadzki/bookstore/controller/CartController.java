@@ -15,10 +15,10 @@ public class CartController {
 
     @GetMapping
     public ResponseEntity showCart(){
-        if (cartService.getAllCartBooks() == null){
+        if (cartService.getCart() == null){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok().body(cartService.getAllCartBooks());
+        return ResponseEntity.ok().body(cartService.getCart());
     }
 
 

@@ -1,5 +1,6 @@
 package pl.zawadzki.bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,7 +20,10 @@ public class Cart implements Serializable {
 
     @NonNull
     @OneToOne
+    @JsonIgnore
     private User user;
+
+    private double finalPrice = 0.0;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
@@ -32,6 +36,11 @@ public class Cart implements Serializable {
 
     public void removeBook(Book book){
         this.books.remove(book);
+    }
+
+    public void calculatePrice(){
+        this.books.forEach(book -> this.finalPrice += book.getPrice());
+        
     }
 
 }

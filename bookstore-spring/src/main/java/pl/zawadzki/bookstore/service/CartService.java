@@ -8,7 +8,6 @@ import pl.zawadzki.bookstore.model.Cart;
 import pl.zawadzki.bookstore.repository.BookRepository;
 import pl.zawadzki.bookstore.repository.CartRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,12 +26,13 @@ public class CartService {
         Cart finalCart = optionalCart.orElse(new Cart(currentUserService.getCurrentUser()));
 
         finalCart.addBook(book);
+        finalCart.calculatePrice();
         cartRepository.save(finalCart);
     }
 
-    public List<Book> getAllCartBooks(){
+    public Cart getCart(){
         Optional<Cart> optionalCart = cartRepository.getByUser(currentUserService.getCurrentUser());
         Cart finalCart = optionalCart.orElse(new Cart(currentUserService.getCurrentUser()));
-        return finalCart.getBooks();
+        return finalCart;
     }
 }
