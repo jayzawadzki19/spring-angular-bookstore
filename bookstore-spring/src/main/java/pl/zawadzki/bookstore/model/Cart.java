@@ -25,7 +25,7 @@ public class Cart implements Serializable {
 
     private double finalPrice = 0.0;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Book> books = new ArrayList<>();
 //    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private Set<Book> books = new HashSet<>();
@@ -40,7 +40,6 @@ public class Cart implements Serializable {
 
     public void calculatePrice(){
         this.books.forEach(book -> this.finalPrice += book.getPrice());
-        
     }
 
 }

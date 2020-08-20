@@ -29,10 +29,6 @@ public class Order implements Serializable {
     private List<Book> books;
     private boolean finished;
 
-    public void countFinalPrice() {
-        this.books.forEach(book -> finalPrice += book.getPrice());
-    }
-
     public void setCreatedAtTime(){
         this.createdAt = LocalDateTime.now();
     }
