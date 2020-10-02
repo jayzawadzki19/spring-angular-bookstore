@@ -1,6 +1,5 @@
 package pl.zawadzki.bookstore.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,6 @@ import java.io.Serializable;
 @Entity
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "authors")
 public class Author implements Serializable {
 
@@ -24,12 +22,5 @@ public class Author implements Serializable {
     @NotBlank(message = "Name is required")
     private String name;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "bookId")
-//    private List<Book> books = new ArrayList<>();
-//
-//    public void addBook(Book book) {
-//        this.books.add(book);
-//    }
 
 }
