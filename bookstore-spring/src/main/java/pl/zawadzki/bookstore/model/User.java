@@ -1,5 +1,6 @@
 package pl.zawadzki.bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,12 +35,33 @@ public class User implements Serializable {
     private String email;
 
     @Pattern(regexp = "\\d{9}")
+    @NotEmpty
     private String phone;
 
+    @NotNull
     private boolean isActive;
+
     private final LocalDateTime createdAt = LocalDateTime.now();
 
     @NotEmpty
     private String role = "ROLE_USER";
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Cart cart;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isActive=" + isActive +
+                ", createdAt=" + createdAt +
+                ", role='" + role + '\'' +
+                ", cart=" + cart +
+                '}';
+    }
 }
