@@ -39,6 +39,9 @@ public class User implements Serializable {
     @NotEmpty
     private String phone;
 
+    @NotEmpty
+    private String address;
+
     @NotNull
     private boolean isActive;
 
@@ -60,6 +63,7 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
                 ", isActive=" + isActive +
                 ", createdAt=" + createdAt +
                 ", role='" + role + '\'' +
