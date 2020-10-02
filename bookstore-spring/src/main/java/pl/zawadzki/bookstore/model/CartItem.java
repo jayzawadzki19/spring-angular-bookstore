@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Data
@@ -31,6 +33,9 @@ public class CartItem implements Serializable {
     @NotEmpty
     private Long bookId;
 
+    @NotNull
+    private BigDecimal price;
+
     @Min(1)
     private int quantity;
 
@@ -39,6 +44,7 @@ public class CartItem implements Serializable {
         return "CartItem{" +
                 "id=" + id +
                 ", bookId=" + bookId +
+                ", price=" + price +
                 ", quantity=" + quantity +
                 '}';
     }
@@ -51,11 +57,12 @@ public class CartItem implements Serializable {
         CartItem cartItem = (CartItem) o;
         return quantity == cartItem.quantity &&
                 Objects.equals(id, cartItem.id) &&
+                Objects.equals(price,cartItem.price) &&
                 Objects.equals(bookId, cartItem.bookId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, bookId, quantity);
+        return Objects.hash(super.hashCode(), id, bookId, quantity, price);
     }
 }

@@ -11,6 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -31,7 +32,7 @@ public class Book implements Serializable {
     private String description;
 
     @NotNull
-    private double price;
+    private BigDecimal price;
 
     /** Nuber of books in storage */
     @NotNull
