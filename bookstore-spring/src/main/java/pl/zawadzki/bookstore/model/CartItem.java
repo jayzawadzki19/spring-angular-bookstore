@@ -1,6 +1,7 @@
 package pl.zawadzki.bookstore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 @Builder
+@AllArgsConstructor
 public class CartItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package pl.zawadzki.bookstore.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.Set;
 @Entity
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @DynamicUpdate
 @Table(name = "orders")
 public class Order implements Serializable {
