@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.zawadzki.bookstore.dto.CartItemDto;
 import pl.zawadzki.bookstore.service.CartService;
 
 @RestController
@@ -22,10 +23,11 @@ public class CartController {
     }
 
 
-    @PostMapping("/add/{id}")
-    public ResponseEntity addToCart(@PathVariable Long id){
-        cartService.addToCart(id);
+    @PostMapping("/add/")
+    public ResponseEntity addToCart(@RequestBody CartItemDto cartItemDto){
+        cartService.addToCart(cartItemDto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
 
 }

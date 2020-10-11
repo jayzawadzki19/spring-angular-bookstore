@@ -24,12 +24,5 @@ public class Author implements Serializable {
     @NotBlank(message = "Name is required")
     private String name;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "bookId")
-//    private List<Book> books = new ArrayList<>();
-//
-//    public void addBook(Book book) {
-//        this.books.add(book);
-//    }
 
 }

@@ -1,45 +1,49 @@
 package pl.zawadzki.bookstore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
+@Getter
+@Setter
 public class Cart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long cartId;
 
-    @NonNull
-    @OneToOne
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private User user;
 
-    private double finalPrice = 0.0;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, orphanRemoval = true,
+            mappedBy = "cart")
+    private Set<CartItem> cartItems = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Book> books = new ArrayList<>();
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Set<Book> books = new HashSet<>();
-
-    public void addBook(Book book){
-        this.books.add(book);
+    /** Create cart from user */
+    public Cart(User user){
+        this.user = user;
     }
 
-    public void removeBook(Book book){
-        this.books.remove(book);
-    }
-
-    public void calculatePrice(){
-        this.books.forEach(book -> this.finalPrice += book.getPrice());
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cartId=" + cartId +
+                ", cartItems=" + cartItems +
+                '}';
     }
 
 }
