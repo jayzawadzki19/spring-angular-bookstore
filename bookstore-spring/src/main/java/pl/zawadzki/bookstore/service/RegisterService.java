@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.zawadzki.bookstore.dto.RegisterRequest;
+import pl.zawadzki.bookstore.model.Cart;
 import pl.zawadzki.bookstore.model.User;
+import pl.zawadzki.bookstore.repository.CartRepository;
 import pl.zawadzki.bookstore.repository.UserRepository;
 
 @Service
@@ -14,6 +16,7 @@ import pl.zawadzki.bookstore.repository.UserRepository;
 public class RegisterService {
 
     private final UserRepository userRepository;
+    private final CartRepository cartRepository;
     private final PasswordEncoder passwordEncoder;
 
     public ResponseEntity<String> signUp(RegisterRequest registerRequest){
@@ -26,6 +29,7 @@ public class RegisterService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setActive(true);
         userRepository.save(user);
+        createCartForUser(user);
         return new ResponseEntity<>("Registration Successful", HttpStatus.OK);
     }
 
@@ -33,5 +37,11 @@ public class RegisterService {
         return
                 userRepository.existsByUsername(registerRequest.getUsername())
                 || userRepository.existsByEmail(registerRequest.getEmail());
+    }
+
+    private void createCartForUser(User user){
+        Cart cart = new Cart();
+        cart.setUser(user);
+        cartRepository.save(cart);
     }
 }
