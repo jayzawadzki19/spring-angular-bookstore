@@ -29,27 +29,39 @@ public class CartService {
             throw new BookNotFoundException("Book was not found");
         }
         Cart finalCart = cartRepository.getByUser(currentUserService.getCurrentUser());
-        /**
-         * Creates for every cartItem in finalCart Set<CartItem> copy of this Set<> and creates
-         * Optional CartItem by filtering along Set with bookId
-         */
-        finalCart.getCartItems().forEach(cartItem -> {
-            Set<CartItem> items = finalCart.getCartItems();
-            Optional<CartItem> itemOptional = items.stream().filter(e -> e.getBookId().equals(cartItem.getBookId())).findFirst();
-            CartItem item;
-            /** Increase quantity if item is already in cart */
-            if (itemOptional.isPresent()) {
-                item = itemOptional.get();
-                item.setQuantity(cartItem.getQuantity() + item.getQuantity());
-            }
-            /** if not add item to Set */
-            else {
-                item = cartItem;
-                item.setCart(finalCart);
-                finalCart.getCartItems().add(item);
-            }
+        /** Add first item if Set in Cart is empty to avoid iterating on empty Set */
+        if (finalCart.getCartItems().size() == 0) {
+            CartItem item = CartItem.builder()
+                    .bookId(cartItemDto.getBookId())
+                    .cart(finalCart)
+                    .price(book.getPrice())
+                    .quantity(cartItemDto.getQuantity())
+                    .build();
+            finalCart.getCartItems().add(item);
             cartItemRepository.save(item);
-        });
+        } else {
+            /**
+             * Creates for every cartItem in finalCart Set<CartItem> copy of this Set<> and creates
+             * Optional CartItem by filtering along Set with bookId
+             */
+            finalCart.getCartItems().forEach(cartItem -> {
+                Set<CartItem> items = finalCart.getCartItems();
+                Optional<CartItem> itemOptional = items.stream().filter(e -> e.getBookId().equals(cartItem.getBookId())).findFirst();
+                CartItem item;
+                /** Increase quantity if item is already in cart */
+                if (itemOptional.isPresent()) {
+                    item = itemOptional.get();
+                    item.setQuantity(cartItem.getQuantity() + cartItemDto.getQuantity());
+                }
+                /** if not add item to Set */
+                else {
+                    item = cartItem;
+                    item.setCart(finalCart);
+                    finalCart.getCartItems().add(item);
+                }
+                cartItemRepository.save(item);
+            });
+        }
         cartRepository.save(finalCart);
     }
 
