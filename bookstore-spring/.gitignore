@@ -34,3 +34,4 @@ build/
 
 ### DB ###
 bookStore.mv.db
+/bookStoreTest.mv.db
