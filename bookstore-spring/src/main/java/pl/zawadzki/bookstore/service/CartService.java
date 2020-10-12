@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.zawadzki.bookstore.dto.CartItemDto;
 import pl.zawadzki.bookstore.exception.BookNotFoundException;
+import pl.zawadzki.bookstore.model.Book;
 import pl.zawadzki.bookstore.model.Cart;
 import pl.zawadzki.bookstore.model.CartItem;
 import pl.zawadzki.bookstore.repository.BookRepository;
@@ -31,12 +32,7 @@ public class CartService {
         Cart finalCart = cartRepository.getByUser(currentUserService.getCurrentUser());
         /** Add first item if Set in Cart is empty to avoid iterating on empty Set */
         if (finalCart.getCartItems().size() == 0) {
-            CartItem item = CartItem.builder()
-                    .bookId(cartItemDto.getBookId())
-                    .cart(finalCart)
-                    .price(book.getPrice())
-                    .quantity(cartItemDto.getQuantity())
-                    .build();
+            CartItem item = createItem(cartItemDto,finalCart,book);
             finalCart.getCartItems().add(item);
             cartItemRepository.save(item);
         } else {
@@ -46,7 +42,7 @@ public class CartService {
              */
             finalCart.getCartItems().forEach(cartItem -> {
                 Set<CartItem> items = finalCart.getCartItems();
-                Optional<CartItem> itemOptional = items.stream().filter(e -> e.getBookId().equals(cartItem.getBookId())).findFirst();
+                Optional<CartItem> itemOptional = items.stream().filter(e -> e.getBookId().equals(cartItemDto.getBookId())).findFirst();
                 CartItem item;
                 /** Increase quantity if item is already in cart */
                 if (itemOptional.isPresent()) {
@@ -55,8 +51,7 @@ public class CartService {
                 }
                 /** if not add item to Set */
                 else {
-                    item = cartItem;
-                    item.setCart(finalCart);
+                    item = createItem(cartItemDto,finalCart,book);
                     finalCart.getCartItems().add(item);
                 }
                 cartItemRepository.save(item);
@@ -79,6 +74,15 @@ public class CartService {
         getCart().getCartItems().remove(optionalCartItem.get());
         cartItemRepository.deleteById(optionalCartItem.get().getId());
 
+    }
+
+    private CartItem createItem(CartItemDto cartItemDto, Cart finalCart, Book book){
+        return CartItem.builder()
+                .bookId(cartItemDto.getBookId())
+                .cart(finalCart)
+                .price(book.getPrice())
+                .quantity(cartItemDto.getQuantity())
+                .build();
     }
 
 }
