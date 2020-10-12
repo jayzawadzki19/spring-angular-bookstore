@@ -69,4 +69,16 @@ public class CartService {
         return currentUserService.getCurrentUser().getCart();
     }
 
+    @Transactional
+    public void removeFromCart(CartItemDto cartItemDto) {
+        Optional<CartItem> optionalCartItem = cartItemRepository.getCartItemByBookId(cartItemDto.getBookId());
+        if (optionalCartItem.isEmpty()) {
+            throw new BookNotFoundException("Book was not found.");
+        }
+
+        getCart().getCartItems().remove(optionalCartItem.get());
+        cartItemRepository.deleteById(optionalCartItem.get().getId());
+
+    }
+
 }
