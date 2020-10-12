@@ -10,6 +10,7 @@ import pl.zawadzki.bookstore.exception.BookNotFoundException;
 import pl.zawadzki.bookstore.model.Book;
 import pl.zawadzki.bookstore.service.BookService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,6 +33,11 @@ public class BookController {
     @GetMapping("/byTitle/{title}")
     public ResponseEntity<Book> getByTitle(@PathVariable String title){
         return ResponseEntity.status(HttpStatus.OK).body(bookService.getByTitle(title));
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addBook(@Valid @RequestBody Book book){
+        return bookService.addBook(book);
     }
 
 
