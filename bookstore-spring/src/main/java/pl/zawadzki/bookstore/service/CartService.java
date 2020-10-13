@@ -8,9 +8,11 @@ import pl.zawadzki.bookstore.exception.BookNotFoundException;
 import pl.zawadzki.bookstore.model.Book;
 import pl.zawadzki.bookstore.model.Cart;
 import pl.zawadzki.bookstore.model.CartItem;
+import pl.zawadzki.bookstore.model.Order;
 import pl.zawadzki.bookstore.repository.BookRepository;
 import pl.zawadzki.bookstore.repository.CartItemRepository;
 import pl.zawadzki.bookstore.repository.CartRepository;
+import pl.zawadzki.bookstore.repository.OrderRepository;
 
 import java.util.Optional;
 import java.util.Set;
@@ -20,8 +22,10 @@ import java.util.Set;
 public class CartService {
     private final CartRepository cartRepository;
     private final BookRepository bookRepository;
+    private final BookService bookService;
     private final CartItemRepository cartItemRepository;
     private final CurrentUserService currentUserService;
+    private final OrderRepository orderRepository;
 
     @Transactional
     public void addToCart(CartItemDto cartItemDto) {
@@ -74,6 +78,18 @@ public class CartService {
         getCart().getCartItems().remove(optionalCartItem.get());
         cartItemRepository.deleteById(optionalCartItem.get().getId());
 
+    }
+
+    @Transactional
+    public void checkout() {
+        Order order = new Order(currentUserService.getCurrentUser());
+        orderRepository.save(order);
+        getCart().getCartItems().forEach(cartItem -> {
+            cartItem.setCart(null);
+            cartItem.setOrder(order);
+            bookService.decreaseStock(cartItem.getBookId(),cartItem.getQuantity());
+            cartItemRepository.save(cartItem);
+        });
     }
 
     private CartItem createItem(CartItemDto cartItemDto, Cart finalCart, Book book){
