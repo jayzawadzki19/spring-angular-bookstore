@@ -5,13 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class OrderDto {
     private Long orderId;
-    private double finalPrice = 0;
+    private BigDecimal finalPrice = new BigDecimal(0);
     private boolean finished;
-    private Integer numberOfBooks;
+    private Integer numberOfCartItems;
+
 }

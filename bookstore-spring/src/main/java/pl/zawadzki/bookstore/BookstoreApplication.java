@@ -11,6 +11,8 @@ import pl.zawadzki.bookstore.repository.AuthorRepository;
 import pl.zawadzki.bookstore.repository.BookRepository;
 import pl.zawadzki.bookstore.repository.PublisherRepository;
 
+import java.math.BigDecimal;
+
 @SpringBootApplication
 public class BookstoreApplication {
 
@@ -28,16 +30,15 @@ public class BookstoreApplication {
                 publisherRepository.save(publisher);
                 Author author1 = new Author();
                 author1.setName("Marian");
-                Author author2 = new Author();
-                author2.setName("Grzegorz");
                 authorRepository.save(author1);
-                authorRepository.save(author2);
-                bookRepository.save(new Book(null,"Book1",21.40,
-                        author1,publisher));
-                bookRepository.save(new Book(null,"Book2",31.40,
-                        author1,publisher));
-                bookRepository.save(new Book(null,"Book3",41.40,
-                        author2,publisher));
+                Book book = new Book();
+                book.setAuthor(author1);
+                book.setPublisher(publisher);
+                book.setTitle("Test1");
+                book.setBookStock(10);
+                book.setDescription("Description");
+                book.setPrice(new BigDecimal(23.12));
+                bookRepository.save(book);
             }
         };
     }
