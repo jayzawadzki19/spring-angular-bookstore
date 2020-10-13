@@ -70,7 +70,7 @@ public class CartService {
         if (optionalCartItem.isEmpty()) {
             throw new BookNotFoundException("Book was not found.");
         }
-
+        optionalCartItem.get().setCart(null);
         getCart().getCartItems().remove(optionalCartItem.get());
         cartItemRepository.deleteById(optionalCartItem.get().getId());
 
