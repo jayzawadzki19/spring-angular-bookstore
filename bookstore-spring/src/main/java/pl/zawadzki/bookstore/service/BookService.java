@@ -49,5 +49,17 @@ public class BookService {
                 .orElseThrow(()->new BookNotFoundException("Book " + title + " does not exist."));
     }
 
+    @Transactional
+    public void decreaseStock(Long bookId, Integer amount) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new BookNotFoundException("Book " + bookId + " does not exist."));
+        int amountAfter = book.getBookStock() - amount;
+        if (amountAfter < 0) {
+            throw new BookNotFoundException("Not enough books in stock");
+        }
+        book.setBookStock(amountAfter);
+        bookRepository.save(book);
+    }
+
 
 }
