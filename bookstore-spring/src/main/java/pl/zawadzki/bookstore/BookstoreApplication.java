@@ -22,24 +22,29 @@ public class BookstoreApplication {
 
     @Bean
     public CommandLineRunner dataLoader(BookRepository bookRepository, PublisherRepository publisherRepository, AuthorRepository authorRepository) {
-        return new CommandLineRunner() {
-            @Override
-            public void run(String... args) throws Exception {
-                Publisher publisher = new Publisher();
-                publisher.setName("P1");
-                publisherRepository.save(publisher);
-                Author author1 = new Author();
-                author1.setName("Marian");
-                authorRepository.save(author1);
-                Book book = new Book();
-                book.setAuthor(author1);
-                book.setPublisher(publisher);
-                book.setTitle("Test1");
-                book.setBookStock(10);
-                book.setDescription("Description");
-                book.setPrice(new BigDecimal(23.12));
-                bookRepository.save(book);
-            }
+        return args -> {
+            Publisher publisher = new Publisher();
+            publisher.setName("P1");
+            publisherRepository.save(publisher);
+            Author author1 = new Author();
+            author1.setName("Marian");
+            authorRepository.save(author1);
+            Book book = new Book();
+            Book book2 = new Book();
+            book.setAuthor(author1);
+            book.setPublisher(publisher);
+            book.setTitle("Test1");
+            book.setBookStock(10);
+            book.setDescription("First added book description");
+            book.setPrice(new BigDecimal(23.12));
+            book2.setAuthor(author1);
+            book2.setPublisher(publisher);
+            book2.setTitle("Second Book");
+            book2.setBookStock(5);
+            book2.setDescription("Description for Second Book");
+            book2.setPrice(new BigDecimal(15.99));
+            bookRepository.save(book);
+            bookRepository.save(book2);
         };
     }
 }
