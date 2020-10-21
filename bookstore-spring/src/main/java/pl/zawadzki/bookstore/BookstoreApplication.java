@@ -4,6 +4,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import pl.zawadzki.bookstore.config.SwaggerConfig;
 import pl.zawadzki.bookstore.model.Author;
 import pl.zawadzki.bookstore.model.Book;
 import pl.zawadzki.bookstore.model.Publisher;
@@ -14,6 +16,7 @@ import pl.zawadzki.bookstore.repository.PublisherRepository;
 import java.math.BigDecimal;
 
 @SpringBootApplication
+@Import(SwaggerConfig.class)
 public class BookstoreApplication {
 
     public static void main(String[] args) {
