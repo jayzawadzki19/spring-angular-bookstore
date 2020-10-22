@@ -1,1 +1,31 @@
-<p>signup works!</p>
+<form [formGroup]="signupForm">
+  <div class="form-group">
+    <label for="InputEmail">Email address</label>
+    <input type="email" class="form-control" id="InputEmail" [formControlName]="'email'" aria-describedby="emailHelp"
+           placeholder="Enter email">
+    <label class="text-danger" *ngIf="signupForm.controls['email'].hasError('email')" style="font-size: 13px">
+      Enter a valid email address!
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label for="InputUsername">Username</label>
+    <input type="text" [formControlName]="'username'" class="form-control" id="InputUsername"
+           placeholder="Enter username">
+  </div>
+
+  <div class="form-group">
+    <label for="InputPassword">Password</label>
+    <input type="password" class="form-control" [formControlName]="'password'" id="InputPassword"
+           placeholder="Enter password">
+  </div>
+
+  <div class="form-group">
+    <label for="InputConfirmPassword">Confirm password</label>
+    <input type="password" class="form-control" id="InputConfirmPassword" [formControlName]="'confirmPassword'"
+           placeholder="Confirm password">
+  </div>
+
+  <button type="button" class="btn from-center btn-light mx-auto" style="text-align:center;display:block;">Sign Up
+  </button>
+</form>

@@ -1,11 +1,11 @@
 <header>
-  <nav class="navbar fixed-top navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg">
     <div class="flex-grow-1">
       <span class="bookstore-text font-weight-light">Free shipping, 30-day return or refund guarantee.</span>
     </div>
     <div class="flex-grow-1 float-right font-weight-light">
-      <a routerLink="/signup" class="float-right signup mr-2">Sign Up</a>
-      <a routerLink="/login" class="float-right login mr-2">Login</a>
+      <button class="btn btn-lg btn-outline-primary signup float-right" (click)="open()">Sign Up</button>
+      <button class="btn btn-lg btn-outline-primary login float-right">Login</button>
     </div>
   </nav>
 </header>

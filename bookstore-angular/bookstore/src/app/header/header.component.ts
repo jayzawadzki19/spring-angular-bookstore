@@ -1,15 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {SignupComponent} from "../auth/signup/signup.component";
+
+// @Component({
+//   selector: 'signup-popup',
+//   templateUrl: '../auth/signup/signup.component.html',
+//   styleUrls: ['../auth/signup/signup.component.css']
+// })
+//
+// export class SignupPopup {
+//   @Input() name;
+//
+//   constructor(public activeModal: NgbActiveModal) {
+//   }
+//
+// }
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) {
+  }
 
   ngOnInit(): void {
+  }
+
+  open() {
+    const modalRef = this.modalService.open(SignupComponent);
+    modalRef.componentInstance.name = 'Signup';
   }
 
 }

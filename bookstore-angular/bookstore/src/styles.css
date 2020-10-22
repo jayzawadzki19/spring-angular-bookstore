@@ -3,3 +3,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
   font-family: 'Crimson Text', serif;
 }
+
+html, body { height: 100%; }
