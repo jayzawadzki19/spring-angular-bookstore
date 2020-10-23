@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "./custom-validators";
+import {SignupRequest} from "./signup-request";
+import {AuthService} from "../shared/auth.service";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-signup',
@@ -9,9 +12,15 @@ import {CustomValidators} from "./custom-validators";
 })
 export class SignupComponent implements OnInit {
 
+  signupRequest: SignupRequest;
   signupForm: FormGroup;
 
-  constructor() {
+  constructor(private authService: AuthService,public activeModal: NgbActiveModal) {
+    this.signupRequest = {
+      email: '',
+      username: '',
+      password: ''
+    };
   }
 
   ngOnInit(): void {
@@ -30,4 +39,14 @@ export class SignupComponent implements OnInit {
     })
   }
 
+  subbit() {
+    this.signupRequest.email = this.signupForm.get('email').value;
+    this.signupRequest.username = this.signupForm.get('username').value;
+    this.signupRequest.password = this.signupForm.get('password').value;
+
+    this.authService.signup(this.signupRequest)
+      .subscribe(data =>{
+        console.log(data)
+      });
+  }
 }

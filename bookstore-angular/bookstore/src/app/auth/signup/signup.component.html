@@ -1,4 +1,4 @@
-<form [formGroup]="signupForm">
+<form [formGroup]="signupForm" (ngSubmit)="subbit()">
   <div class="form-group">
     <label for="InputEmail">Email address</label>
     <input type="email" class="form-control" id="InputEmail" [formControlName]="'email'" aria-describedby="emailHelp"
@@ -42,6 +42,9 @@
            placeholder="Confirm password">
   </div>
 
-  <button type="button" class="btn from-center btn-light mx-auto" style="text-align:center;display:block;">Sign Up
+  <button type="submit" class="btn from-center btn-light mx-auto"
+          style="text-align:center;display:block;"
+          (click)="activeModal.close('Sign up click')">
+    Sign Up
   </button>
 </form>
