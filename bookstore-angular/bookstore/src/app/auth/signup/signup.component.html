@@ -1,4 +1,4 @@
-<form [formGroup]="signupForm" (ngSubmit)="subbit()">
+<form [formGroup]="signupForm" (ngSubmit)="submit()">
   <div class="form-group">
     <label for="InputEmail">Email address</label>
     <input type="email" class="form-control" id="InputEmail" [formControlName]="'email'" aria-describedby="emailHelp"
@@ -25,13 +25,15 @@
     <label class="text-danger" *ngIf="signupForm.controls['password'].hasError('hasNumber')" style="font-size: 13px">
       Must have at least 1 number!
     </label>
-    <label class="text-danger" *ngIf="signupForm.controls['password'].hasError('hasCapitalCase')" style="font-size: 13px">
+    <label class="text-danger" *ngIf="signupForm.controls['password'].hasError('hasCapitalCase')"
+           style="font-size: 13px">
       Must have at least 1 Capital Case!
     </label>
     <label class="text-danger" *ngIf="signupForm.controls['password'].hasError('hasSmallCase')" style="font-size: 13px">
       Must have at least 1 Small Case!
     </label>
-    <label class="text-danger" *ngIf="!signupForm.controls['password'].valid" style="font-size: 13px">
+    <label class="text-danger" *ngIf="!signupForm.controls['password'].valid
+         && signupForm.get('password').touched" style="font-size: 13px">
       Must have at least 5 characters!
     </label>
   </div>
@@ -43,8 +45,10 @@
   </div>
 
   <button type="submit" class="btn from-center btn-light mx-auto"
-          style="text-align:center;display:block;"
-          (click)="activeModal.close('Sign up click')">
+          style="text-align:center;display:block;">
     Sign Up
   </button>
+  <div class="login-failed" *ngIf='this.isError'>
+    <p class="login-failed-text">SignUp Failed. Please check your credentials and try again.</p>
+  </div>
 </form>

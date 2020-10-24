@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {SignupComponent} from "../auth/signup/signup.component";
-
+import {LoginComponent} from "../auth/login/login.component";
 // @Component({
 //   selector: 'signup-popup',
 //   templateUrl: '../auth/signup/signup.component.html',
@@ -35,4 +35,8 @@ export class HeaderComponent implements OnInit {
     modalRef.componentInstance.name = 'Signup';
   }
 
+  login() {
+    const modalRef = this.modalService.open(LoginComponent);
+    modalRef.componentInstance.name = 'Login';
+  }
 }

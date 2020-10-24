@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CustomValidators} from "./custom-validators";
+import {CustomValidators} from "../Validators/custom-validators";
 import {SignupRequest} from "./signup-request";
 import {AuthService} from "../shared/auth.service";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {throwError} from "rxjs";
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +15,7 @@ export class SignupComponent implements OnInit {
 
   signupRequest: SignupRequest;
   signupForm: FormGroup;
+  isError: boolean;
 
   constructor(private authService: AuthService,public activeModal: NgbActiveModal) {
     this.signupRequest = {
@@ -39,14 +41,19 @@ export class SignupComponent implements OnInit {
     })
   }
 
-  subbit() {
+  submit() {
     this.signupRequest.email = this.signupForm.get('email').value;
     this.signupRequest.username = this.signupForm.get('username').value;
     this.signupRequest.password = this.signupForm.get('password').value;
 
     this.authService.signup(this.signupRequest)
       .subscribe(data =>{
+        this.isError = false;
         console.log(data)
+        this.activeModal.close("Signup click")
+      }, error => {
+        this.isError = true;
+        throwError(error);
       });
   }
 }

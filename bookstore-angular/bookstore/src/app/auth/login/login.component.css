@@ -1,0 +1,42 @@
+form {
+  padding: 20px;
+  font-size: 17px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  text-decoration: none;
+  background-color: whitesmoke;
+}
+
+.btn {
+  border: 0;
+  background-color: transparent;
+  display: inline-block;
+  font-size: 1.4rem;
+  letter-spacing: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.btn:after {
+  content: '';
+  display: block;
+  margin: auto;
+  height: 3px;
+  width: 0px;
+  background: transparent;
+  transition: width .5s ease, background-color .5s ease;
+}
+
+.btn:hover:after{
+  width: 100%;
+  background: black;
+}
+
+input {
+  background-color: transparent;
+}
+
+.errorHandler {
+}
+
+
