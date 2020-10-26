@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {SignupRequest} from "../signup/signup-request";
 import {Observable} from "rxjs";
@@ -12,17 +12,22 @@ import {map} from "rxjs/operators";
 })
 export class AuthService {
 
-  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService) { }
+  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService) {
+  }
 
-  signup(signupRequest: SignupRequest) : Observable<any>{
+  signup(signupRequest: SignupRequest): Observable<any> {
     return this.httpClient.post("http://localhost:8080/api/auth/register", signupRequest, {responseType: 'text'});
   }
 
-  login(loginRequest: LoginRequest) : Observable<boolean> {
+  login(loginRequest: LoginRequest): Observable<boolean> {
     return this.httpClient.post<LoginResponse>("http://localhost:8080/api/auth/login", loginRequest)
-      .pipe(map(data =>{
-        this.localStorage.store('username',data.username);
+      .pipe(map(data => {
+        this.localStorage.store('username', data.username);
         return true;
       }));
+  }
+
+  getUsername() {
+    return this.localStorage.retrieve('username');
   }
 }

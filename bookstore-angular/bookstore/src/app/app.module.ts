@@ -12,6 +12,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './auth/login/login.component';
 import {NgxWebstorageModule} from "ngx-webstorage";
+import { HomeComponent } from './home/home.component';
+import { BooksComponent } from './books/books.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {NgxWebstorageModule} from "ngx-webstorage";
     HeaderComponent,
     NavbarComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    BooksComponent
   ],
   imports: [
     BrowserModule,
