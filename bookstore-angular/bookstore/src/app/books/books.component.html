@@ -1,1 +1,17 @@
-<p>books works!</p>
+<div class="book-body">
+    <div class="row card-deck text-center">
+      <div class="col-lg-4 books" *ngFor="let book of books$">
+        <div class="card mb-4">
+          <img height="50%" class="card-img-top" src="assets/icons/booktemplate.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{book.title}}</h5>
+            <p>Price: {{book.price}}</p>
+            <hr>
+          </div>
+          <div class="card-body">
+            <a href="#" class="card-link">Add to basket</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
