@@ -1,17 +1,21 @@
 <div class="book-body">
-    <div class="row card-deck text-center">
-      <div class="col-lg-4 books" *ngFor="let book of books$">
-        <div class="card mb-4">
-          <img height="50%" class="card-img-top" src="assets/icons/booktemplate.png" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">{{book.title}}</h5>
-            <p>Price: {{book.price}}</p>
-            <hr>
-          </div>
-          <div class="card-body">
-            <a href="#" class="card-link">Add to basket</a>
-          </div>
+  <div class="row card-deck text-center">
+    <div class="col-4 col-sm-4 col-md-4 col-lg-4 books" *ngFor="let book of books$ |
+      paginate: {id: 'books', itemsPerPage: 12, currentPage: p, totalItems: books$.length}">
+      <div class="card mb-4">
+        <img height="50%" class="card-img-top" src="assets/icons/booktemplate.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{book.title}}</h5>
+          <hr>
+        </div>
+        <div class="card-body">
+          <p>Price: {{book.price | currency}}</p>
+          <a href="#" class="btn btn-primary btn-lg" *ngIf="book.bookStock != 0; else offBlock">Add to basket</a>
+          <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Currently unavailable</a></ng-template>
         </div>
       </div>
     </div>
+  </div>
 </div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+

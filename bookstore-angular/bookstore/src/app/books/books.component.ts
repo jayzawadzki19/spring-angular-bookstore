@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {BookService} from "../shared/book.service";
-import {BookModel} from "../shared/book-model";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BookService} from "../shared/service/book-service/book.service";
+import {BookModel} from "../shared/model/book/book-model";
 
 @Component({
   selector: 'app-books',
@@ -10,6 +10,7 @@ import {BookModel} from "../shared/book-model";
 export class BooksComponent implements OnInit {
 
   books$: Array<BookModel> = [];
+  p: number = 1;
 
   constructor(private bookService: BookService) {
     this.bookService.getAllBooks().subscribe(book => {

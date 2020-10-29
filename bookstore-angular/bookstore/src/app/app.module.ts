@@ -14,6 +14,8 @@ import { LoginComponent } from './auth/login/login.component';
 import {NgxWebstorageModule} from "ngx-webstorage";
 import { HomeComponent } from './home/home.component';
 import { BooksComponent } from './books/books.component';
+import {NgxPaginationModule} from "ngx-pagination";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { BooksComponent } from './books/books.component';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    BooksComponent
+    BooksComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { BooksComponent } from './books/books.component';
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
