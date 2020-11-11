@@ -9,13 +9,15 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './auth/login/login.component';
 import {NgxWebstorageModule} from "ngx-webstorage";
 import { HomeComponent } from './home/home.component';
 import { BooksComponent } from './books/books.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { FooterComponent } from './footer/footer.component';
+import {CookieService} from "ngx-cookie-service";
+import {HttpInterceptorService} from "./auth/shared/http-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,14 @@ import { FooterComponent } from './footer/footer.component';
     NgxWebstorageModule.forRoot(),
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    CookieService,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpInterceptorService,
+    //   multi: true
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

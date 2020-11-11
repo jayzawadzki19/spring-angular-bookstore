@@ -2,10 +2,7 @@ package pl.zawadzki.bookstore.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.zawadzki.bookstore.dto.LoginRequest;
 import pl.zawadzki.bookstore.dto.LoginResponse;
 import pl.zawadzki.bookstore.dto.RegisterRequest;
@@ -15,6 +12,7 @@ import pl.zawadzki.bookstore.service.RegisterService;
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
+@CrossOrigin
 public class AuthController {
 
     private final RegisterService registerService;
@@ -26,7 +24,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest loginRequest){
-        return loginService.login(loginRequest);
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
+        return ResponseEntity.ok(loginService.login(loginRequest));
     }
 }

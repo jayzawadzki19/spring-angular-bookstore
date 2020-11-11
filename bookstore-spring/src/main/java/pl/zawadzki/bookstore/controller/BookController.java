@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/books")
 @AllArgsConstructor
 @Slf4j
+@CrossOrigin
 public class BookController {
     private final BookService bookService;
 
@@ -36,6 +37,7 @@ public class BookController {
     }
 
     @PostMapping("/add")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<String> addBook(@Valid @RequestBody Book book){
         return bookService.addBook(book);
     }

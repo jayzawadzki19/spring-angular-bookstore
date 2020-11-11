@@ -3,9 +3,14 @@
     <div class="flex-grow-1">
       <span class="bookstore-text font-weight-light">Free shipping, 30-day return or refund guarantee.</span>
     </div>
-    <div class="flex-grow-1 float-right font-weight-light">
-      <button class="btn btn-lg btn-outline-primary signup float-right" (click)="open()">Sign Up</button>
-      <button class="btn btn-lg btn-outline-primary login float-right" (click)="login()">Login</button>
+    <div class="flex-grow-1 float-right font-weight-light" *ngIf="!isLoggedIn; else elseBlock">
+      <a  class="btn btn-lg btn-outline-primary signup float-right" (click)="open()">Sign Up</a>
+      <a routerLink="/" class="btn btn-lg btn-outline-primary login float-right" (click)="login()">Login</a>
     </div>
+    <ng-template #elseBlock>
+      <div class="flex-grow-1 float-right font-weight-light">
+        <a routerLink="/" class="btn btn-lg btn-outline-primary login float-right" (click)="logout()">Logout</a>
+      </div>
+    </ng-template>
   </nav>
 </header>

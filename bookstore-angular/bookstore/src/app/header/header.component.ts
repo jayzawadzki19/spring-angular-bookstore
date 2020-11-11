@@ -2,19 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {SignupComponent} from "../auth/signup/signup.component";
 import {LoginComponent} from "../auth/login/login.component";
-// @Component({
-//   selector: 'signup-popup',
-//   templateUrl: '../auth/signup/signup.component.html',
-//   styleUrls: ['../auth/signup/signup.component.css']
-// })
-//
-// export class SignupPopup {
-//   @Input() name;
-//
-//   constructor(public activeModal: NgbActiveModal) {
-//   }
-//
-// }
+import {AuthService} from "../auth/shared/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -24,10 +13,17 @@ import {LoginComponent} from "../auth/login/login.component";
 
 export class HeaderComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) {
+  username: string;
+  isLoggedIn: boolean;
+
+  constructor(private modalService: NgbModal, private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
+    this.username = this.authService.getUsername();
+    this.isLoggedIn = this.authService.isLoggedIn();
+    console.log(this.username);
   }
 
   open() {
@@ -38,5 +34,11 @@ export class HeaderComponent implements OnInit {
   login() {
     const modalRef = this.modalService.open(LoginComponent);
     modalRef.componentInstance.name = 'Login';
+  }
+
+  logout() {
+    this.authService.logout();
+    this.isLoggedIn = false;
+    this.router.navigateByUrl('');
   }
 }

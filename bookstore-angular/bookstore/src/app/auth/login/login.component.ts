@@ -4,6 +4,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginRequest} from "./login-request";
 import {throwError} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isError: boolean;
 
-  constructor(private authService: AuthService, public activeModal: NgbActiveModal) {
+  constructor(private authService: AuthService,
+              public activeModal: NgbActiveModal,
+              private router: Router) {
     this.loginRequest = {
       username: '',
       password: ''
@@ -39,7 +42,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginRequest)
       .subscribe(data => {
         this.isError = false;
+        this.router.navigateByUrl('');
         this.activeModal.close("Login click")
+
       }, error => {
         this.isError = true;
         throwError(error);

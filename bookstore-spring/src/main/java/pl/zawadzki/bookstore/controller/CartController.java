@@ -11,6 +11,7 @@ import pl.zawadzki.bookstore.service.CartService;
 @RestController
 @RequestMapping("/api/cart")
 @AllArgsConstructor
+@CrossOrigin
 public class CartController {
     private final CartService cartService;
 
@@ -23,9 +24,10 @@ public class CartController {
     }
 
     @PostMapping("/add")
+    @CrossOrigin(origins = "*")
     public ResponseEntity addToCart(@RequestBody CartItemDto cartItemDto) {
         cartService.addToCart(cartItemDto);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).header("Info", "Book added to cart").build();
     }
 
     @DeleteMapping("/remove")

@@ -1,17 +1,33 @@
 <div class="book-body">
   <div class="row card-deck text-center">
     <div class="col-4 col-sm-4 col-md-4 col-lg-4 books" *ngFor="let book of books$ |
-      paginate: {id: 'books', itemsPerPage: 12, currentPage: p, totalItems: books$.length}">
+      paginate: {id: 'books', itemsPerPage: 6, currentPage: p, totalItems: books$.length}">
       <div class="card mb-4">
         <img height="50%" class="card-img-top" src="assets/icons/booktemplate.png" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{book.title}}</h5>
           <hr>
         </div>
+        <div class="book-description">
+          <span class="description">{{book.description}}</span>
+        </div>
         <div class="card-body">
           <p>Price: {{book.price | currency}}</p>
-          <a href="#" class="btn btn-primary btn-lg" *ngIf="book.bookStock != 0; else offBlock">Add to basket</a>
-          <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Currently unavailable</a></ng-template>
+          <div class="number-input md-number-input">
+            <form [formGroup]="cartForm">
+              <p>Quantity:
+                <input [formControlName]="'quantity'" class="quantity" min="1" max="5" name="quantity" value="1"
+                       type="number">
+              </p>
+            </form>
+          </div>
+          <a (click)="addToCart(book.bookId)" class="btn btn-primary btn-lg"
+             *ngIf="book.bookStock != 0; else offBlock">
+            Add to basket
+          </a>
+          <ng-template #offBlock>
+            <a class="btn btn-secondary btn-lg disabled">Currently unavailable</a>
+          </ng-template>
         </div>
       </div>
     </div>

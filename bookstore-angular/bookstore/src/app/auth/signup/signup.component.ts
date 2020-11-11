@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit {
       .subscribe(data =>{
         this.isError = false;
         console.log(data)
-        this.activeModal.close("Signup click")
+        this.activeModal.close("Sixgnup click")
       }, error => {
         this.isError = true;
         throwError(error);
