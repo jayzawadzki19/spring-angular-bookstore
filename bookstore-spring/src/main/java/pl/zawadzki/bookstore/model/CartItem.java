@@ -35,6 +35,12 @@ public class CartItem implements Serializable {
     @NotEmpty
     private Long bookId;
 
+    @NotEmpty
+    private String bookTitle;
+
+    @NotEmpty
+    private String bookAuthor;
+
     @NotNull
     private BigDecimal price;
 
@@ -46,6 +52,8 @@ public class CartItem implements Serializable {
         return "CartItem{" +
                 "id=" + id +
                 ", bookId=" + bookId +
+                ", bookTitle=" + bookTitle +
+                ", bookAuthor=" + bookAuthor +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';
@@ -60,11 +68,13 @@ public class CartItem implements Serializable {
         return quantity == cartItem.quantity &&
                 Objects.equals(id, cartItem.id) &&
                 Objects.equals(price,cartItem.price) &&
+                Objects.equals(bookTitle,cartItem.bookTitle) &&
+                Objects.equals(bookAuthor,cartItem.bookAuthor) &&
                 Objects.equals(bookId, cartItem.bookId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, bookId, quantity, price);
+        return Objects.hash(super.hashCode(), id, bookId, bookTitle, bookAuthor,quantity, price);
     }
 }

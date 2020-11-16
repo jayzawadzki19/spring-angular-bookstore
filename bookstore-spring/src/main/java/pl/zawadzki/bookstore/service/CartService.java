@@ -96,6 +96,8 @@ public class CartService {
         return CartItem.builder()
                 .bookId(cartItemDto.getBookId())
                 .cart(finalCart)
+                .bookTitle(book.getTitle())
+                .bookAuthor(book.getAuthor().getName())
                 .price(book.getPrice())
                 .quantity(cartItemDto.getQuantity())
                 .build();
