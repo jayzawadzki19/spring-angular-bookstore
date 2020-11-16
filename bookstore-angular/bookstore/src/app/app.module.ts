@@ -18,6 +18,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { FooterComponent } from './footer/footer.component';
 import {CookieService} from "ngx-cookie-service";
 import {HttpInterceptorService} from "./auth/shared/http-interceptor.service";
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {HttpInterceptorService} from "./auth/shared/http-interceptor.service";
     LoginComponent,
     HomeComponent,
     BooksComponent,
-    FooterComponent
+    FooterComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
