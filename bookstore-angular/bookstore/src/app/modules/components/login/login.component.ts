@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../shared/auth.service";
+import {AuthService} from "../../../core/authentication/auth.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {LoginRequest} from "./login-request";
+import {LoginRequest} from "../../../shared/model/login/login-request";
 import {throwError} from "rxjs";
 import {Router} from "@angular/router";
 

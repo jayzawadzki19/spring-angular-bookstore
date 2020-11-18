@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {SignupComponent} from "../auth/signup/signup.component";
-import {LoginComponent} from "../auth/login/login.component";
-import {AuthService} from "../auth/shared/auth.service";
+import {SignupComponent} from "../signup/signup.component";
+import {LoginComponent} from "../login/login.component";
+import {AuthService} from "../../../core/authentication/auth.service";
 import {Router} from "@angular/router";
 
 @Component({

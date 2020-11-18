@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CartDTO} from "./cartDTO";
 import {Observable} from "rxjs";
 import {LocalStorageService} from "ngx-webstorage";
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,15 @@ export class CartService {
       })
     };
     return this.httpClient.get('http://localhost:8080/api/cart',httpHeaders);
+  }
 
+  removeItem(id: number): Observable<any> {
+    const httpHeaders = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: this.localStorage.retrieve('token')
+      })
+    };
+    return this.httpClient.delete(`http://localhost:8080/api/cart/remove/${id}`, httpHeaders);
   }
 }

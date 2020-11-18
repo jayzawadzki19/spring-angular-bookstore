@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BookService} from "../shared/service/book-service/book.service";
-import {BookModel} from "../shared/model/book/book-model";
-import {CartService} from "../shared/service/cart-service/cart.service";
-import {CartDTO} from "../shared/service/cart-service/cartDTO";
+import {BookService} from "../../../core/service/book-service/book.service";
+import {BookModel} from "../../../shared/model/book/book-model";
+import {CartService} from "../../../core/service/cart-service/cart.service";
+import {CartDTO} from "../../../core/service/cart-service/cartDTO";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {throwError} from "rxjs";
 
@@ -37,14 +37,18 @@ export class BooksComponent implements OnInit {
   }
 
   addToCart(bookId: number) {
+    console.log("bookId " + this.cartDTO.bookId);
+    console.log("quantity " + this.cartDTO.quantity);
     this.cartDTO.bookId = bookId;
     this.cartDTO.quantity = this.cartForm.get('quantity').value;
 
-    this.cartService.addToCart(this.cartDTO).subscribe(data =>{
-      console.log(data)
-    }, error => {
-      throwError(error);
-    });
+    if (this.cartDTO.quantity != 0) {
+      this.cartService.addToCart(this.cartDTO).subscribe(data => {
+        console.log(data)
+      }, error => {
+        throwError(error);
+      });
+    }
 
   }
 

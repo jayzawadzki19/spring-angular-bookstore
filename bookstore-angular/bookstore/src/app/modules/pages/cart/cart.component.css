@@ -1,0 +1,17 @@
+.remove {
+  background-color: transparent;
+  color: black;
+  box-sizing: border-box;
+  text-align: center;
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 3px 5px;
+  opacity: 1;
+  border: 0;
+}
+
+.remove:hover {
+  font-weight: bold;
+}

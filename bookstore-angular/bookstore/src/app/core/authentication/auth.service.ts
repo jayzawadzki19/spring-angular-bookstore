@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {SignupRequest} from "../signup/signup-request";
+import {SignupRequest} from "../../shared/model/signup/signup-request";
 import {Observable, throwError} from "rxjs";
-import {LoginRequest} from "../login/login-request";
+import {LoginRequest} from "../../shared/model/login/login-request";
 import {LocalStorageService} from "ngx-webstorage";
-import {LoginResponse} from "../login/login-response";
+import {LoginResponse} from "../../shared/model/login/login-response";
 import {map} from "rxjs/operators";
 import {CookieService} from "ngx-cookie-service";
 

@@ -3,7 +3,7 @@
     <div class="col-4 col-sm-4 col-md-4 col-lg-4 books" *ngFor="let book of books$ |
       paginate: {id: 'books', itemsPerPage: 6, currentPage: p, totalItems: books$.length}">
       <div class="card mb-4">
-        <img height="50%" class="card-img-top" src="assets/icons/booktemplate.png" alt="Card image cap">
+        <img height="50%" class="card-img-top" src="../../../../assets/icons/booktemplate.png" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{book.title}}</h5>
           <hr>

@@ -19,10 +19,16 @@
       <th>{{item.bookAuthor}}</th>
       <th>${{item.price}}</th>
       <th>{{item.quantity}}</th>
-      <th>${{item.quantity * item.price}}</th>
-      <th><a routerLink="/" >Remove</a></th>
+      <th>${{item.quantity * item.price | number:'1.2-2'}}</th>
+      <th><a class="btn remove btn-lg btn-outline-primary" (click)="removeFromCart(item.bookId)" >Remove</a></th>
     </tr>
     </ng-container>
     </tbody>
   </table>
+  <div *ngIf="!isLogged" class="alert alert-info">
+    You must be logged in to see books in cart...
+  </div>
+  <div *ngIf="cart$.length == 0" class="alert alert-info">
+    No books in cart...
+  </div>
 </div>

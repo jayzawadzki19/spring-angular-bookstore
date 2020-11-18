@@ -3,22 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SignupComponent } from './auth/signup/signup.component';
+import { HeaderComponent } from './modules/components/header/header.component';
+import { NavbarComponent } from './modules/components/navbar/navbar.component';
+import { SignupComponent } from './modules/components/signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import { LoginComponent } from './auth/login/login.component';
+import { LoginComponent } from './modules/components/login/login.component';
 import {NgxWebstorageModule} from "ngx-webstorage";
-import { HomeComponent } from './home/home.component';
-import { BooksComponent } from './books/books.component';
+import { HomeComponent } from './modules/pages/home/home.component';
+import { BooksComponent } from './modules/pages/books/books.component';
 import {NgxPaginationModule} from "ngx-pagination";
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './modules/components/footer/footer.component';
 import {CookieService} from "ngx-cookie-service";
-import {HttpInterceptorService} from "./auth/shared/http-interceptor.service";
-import { CartComponent } from './cart/cart.component';
+import {HttpInterceptorService} from "./core/interceptors/http/http-interceptor.service";
+import { CartComponent } from './modules/pages/cart/cart.component';
 
 @NgModule({
   declarations: [

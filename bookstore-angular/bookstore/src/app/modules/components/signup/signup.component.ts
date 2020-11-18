@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CustomValidators} from "../Validators/custom-validators";
-import {SignupRequest} from "./signup-request";
-import {AuthService} from "../shared/auth.service";
+import {CustomValidators} from "../../../core/validators/custom-validators";
+import {SignupRequest} from "../../../shared/model/signup/signup-request";
+import {AuthService} from "../../../core/authentication/auth.service";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {throwError} from "rxjs";
 
