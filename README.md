@@ -2,7 +2,7 @@
 A full-stack Bookstore web application created with Spring and Angular.
 Frontend client makes API calls to the running backend server.
 
-![Site image](.img/site.png)
+![Site image](./img/site.png)
 
 ### Technologies
 
@@ -48,6 +48,6 @@ To run frontend client go to app root folder and:
 Run `npm install`
 Then run `ng serve`
 
-Frontend client is running on [localhost:8080]
+Frontend client is running on [localhost:4200]
 
 ## Currently in building
