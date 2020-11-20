@@ -28,7 +28,7 @@
   <div *ngIf="!isLogged" class="alert alert-info">
     You must be logged in to see books in cart...
   </div>
-  <div *ngIf="cart$.length == 0" class="alert alert-info">
+  <div *ngIf="cart$.length == 0 && isLogged" class="alert alert-info">
     No books in cart...
   </div>
 </div>

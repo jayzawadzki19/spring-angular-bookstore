@@ -30,8 +30,10 @@ public class CartController {
         return ResponseEntity.status(HttpStatus.OK).header("Info", "Book added to cart").build();
     }
 
-    @DeleteMapping("/remove")
-    public ResponseEntity removeFromCart(@RequestBody CartItemDto cartItemDto) {
+    @DeleteMapping("/remove/{id}")
+    public ResponseEntity removeFromCart(@PathVariable long id) {
+        CartItemDto cartItemDto = new CartItemDto();
+        cartItemDto.setBookId(id);
         cartService.removeFromCart(cartItemDto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

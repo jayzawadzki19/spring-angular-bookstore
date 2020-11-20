@@ -34,13 +34,13 @@ public class CartService {
             throw new BookNotFoundException("Book was not found");
         }
         Cart finalCart = cartRepository.getByUser(currentUserService.getCurrentUser());
-        /** Add first item if Set in Cart is empty to avoid iterating on empty Set */
+        /* Add first item if Set in Cart is empty to avoid iterating on empty Set */
         if (finalCart.getCartItems().size() == 0) {
             CartItem item = createItem(cartItemDto,finalCart,book);
             finalCart.getCartItems().add(item);
             cartItemRepository.save(item);
         } else {
-            /**
+            /*
              * Creates for every cartItem in finalCart Set<CartItem> copy of this Set<> and creates
              * Optional CartItem by filtering along Set with bookId
              */
@@ -48,12 +48,12 @@ public class CartService {
                 Set<CartItem> items = finalCart.getCartItems();
                 Optional<CartItem> itemOptional = items.stream().filter(e -> e.getBookId().equals(cartItemDto.getBookId())).findFirst();
                 CartItem item;
-                /** Increase quantity if item is already in cart */
+                /* Increase quantity if item is already in cart */
                 if (itemOptional.isPresent()) {
                     item = itemOptional.get();
                     item.setQuantity(cartItem.getQuantity() + cartItemDto.getQuantity());
                 }
-                /** if not add item to Set */
+                /* if not add item to Set */
                 else {
                     item = createItem(cartItemDto,finalCart,book);
                     finalCart.getCartItems().add(item);
@@ -80,6 +80,7 @@ public class CartService {
 
     }
 
+    /** The checkout() method creates Order for current User from User's current Cart status. */
     @Transactional
     public void checkout() {
         Order order = new Order(currentUserService.getCurrentUser());
