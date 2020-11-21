@@ -49,7 +49,6 @@ export class SignupComponent implements OnInit {
     this.authService.signup(this.signupRequest)
       .subscribe(data =>{
         this.isError = false;
-        console.log(data)
         this.activeModal.close("Sixgnup click")
       }, error => {
         this.isError = true;

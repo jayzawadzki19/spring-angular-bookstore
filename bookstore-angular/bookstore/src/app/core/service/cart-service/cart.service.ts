@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CartDTO} from "./cartDTO";
 import {Observable} from "rxjs";
 import {LocalStorageService} from "ngx-webstorage";
-import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,6 @@ export class CartService {
         Authorization: this.localStorage.retrieve('token')
       })
     };
-    console.log(cartDTO);
     return this.httpClient.post<CartDTO>("http://localhost:8080/api/cart/add", cartDTO, httpHeaders);
   }
 
