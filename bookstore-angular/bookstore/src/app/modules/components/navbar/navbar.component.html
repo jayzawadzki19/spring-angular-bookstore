@@ -19,9 +19,24 @@
     </ul>
     <div class="form-inline my-2 my-lg-0">
       <span class="icons">
-        <img src="../../../../assets/icons/loupe.svg" class="ml-5 mr-5 loupe">
-       <a routerLink="/cart"><img src="../../../../assets/icons/shop.svg" class="cart"></a>
-        <img src="../../../../assets/icons/avatar.svg" class="ml-5 mr-5 avatar">
+        <div *ngIf="getUsername() == null; else elseBlock">
+          <a routerLink="/search"><img src="../../../../assets/icons/loupe.svg" class="search"></a>
+          <a routerLink="/">
+            <img src="../../../../assets/icons/shop.svg" class="cart"
+                 ngbTooltip="You must log in to see cart." placement="left" [openDelay]="300" [closeDelay]="500">
+          </a>
+          <a routerLink="/">
+            <img src="../../../../assets/icons/avatar.svg" class="user"
+                 ngbTooltip="You must log in to see your profile." placement="left" [openDelay]="300" [closeDelay]="500">
+          </a>
+        </div>
+
+        <ng-template #elseBlock>
+          <a routerLink="/search"><img src="../../../../assets/icons/loupe.svg" class="search"></a>
+          <a routerLink="/cart"><img src="../../../../assets/icons/shop.svg" class="cart"></a>
+          <a routerLink="/user"><img src="../../../../assets/icons/avatar.svg" class="user"></a>
+        </ng-template>
+
       </span>
     </div>
   </div>
