@@ -11,6 +11,7 @@ import pl.zawadzki.bookstore.dto.RegisterRequest;
 import pl.zawadzki.bookstore.model.User;
 import pl.zawadzki.bookstore.repository.CartRepository;
 import pl.zawadzki.bookstore.repository.UserRepository;
+import pl.zawadzki.bookstore.service.impl.RegisterServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 class RegisterServiceTest {
@@ -24,7 +25,7 @@ class RegisterServiceTest {
 
 
     @InjectMocks
-    private RegisterService service;
+    private RegisterServiceImpl service;
 
     @Test
     public void shouldRegisterUser() {

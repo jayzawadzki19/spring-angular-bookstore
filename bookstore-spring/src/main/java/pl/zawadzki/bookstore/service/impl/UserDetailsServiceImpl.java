@@ -1,4 +1,4 @@
-package pl.zawadzki.bookstore.service;
+package pl.zawadzki.bookstore.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
