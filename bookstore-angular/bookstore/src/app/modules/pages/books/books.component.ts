@@ -1,29 +1,31 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BookService} from "../../../core/service/book-service/book.service";
 import {BookModel} from "../../../shared/model/book/book-model";
 import {CartService} from "../../../core/service/cart-service/cart.service";
 import {CartDTO} from "../../../core/service/cart-service/cartDTO";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {throwError} from "rxjs";
+import {Subscription, throwError} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.css']
 })
-export class BooksComponent implements OnInit {
+export class BooksComponent implements OnInit, OnDestroy {
 
   books$: Array<BookModel> = [];
-  p: number = 1;
+  page: number = 0;
+  size: number = 6;
   cartDTO: CartDTO;
   cartForm: FormGroup;
+  private querySub: Subscription;
+
 
 
   constructor(private bookService: BookService,
-              private cartService: CartService) {
-    this.bookService.getAllBooks().subscribe(book => {
-      this.books$ = book;
-    });
+              private cartService: CartService,
+              private route: ActivatedRoute) {
     this.cartDTO = {
       bookId: 0,
       quantity: 0
@@ -33,6 +35,31 @@ export class BooksComponent implements OnInit {
   ngOnInit(): void {
     this.cartForm = new FormGroup({
       quantity: new FormControl(0, [Validators.required]),
+    });
+    this.querySub = this.route.queryParams.subscribe(() => {
+      this.update()
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.querySub.unsubscribe();
+  }
+
+
+  update() {
+    if(this.route.snapshot.queryParamMap.get('page')) {
+      const currentPage = +this.route.snapshot.queryParamMap.get('page');
+      const size = +this.route.snapshot.queryParamMap.get('size');
+      this.getBooks(currentPage,size);
+    } else {
+      this.getBooks();
+    }
+  }
+
+  getBooks(page: number = 0, size: number = 6) {
+    this.bookService.getAllBooks(page, size).subscribe(book => {
+      this.books$ = book;
+      this.page = page;
     });
   }
 
@@ -49,7 +76,7 @@ export class BooksComponent implements OnInit {
         throwError(error);
       });
     }
-
   }
+
 
 }
