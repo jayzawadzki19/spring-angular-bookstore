@@ -1,7 +1,6 @@
 <div class="book-body">
   <div class="row card-deck text-center">
-    <div class="col-4 col-sm-4 col-md-4 col-lg-4 books" *ngFor="let book of books$ |
-      paginate: {id: 'books', itemsPerPage: 6, currentPage: p, totalItems: books$.length}">
+    <div class="col-4 col-sm-4 col-md-4 col-lg-4 books" *ngFor="let book of books$">
       <div class="card mb-4">
         <img height="50%" class="card-img-top" src="../../../../assets/icons/booktemplate.png" alt="Card image cap">
         <div class="card-body">
@@ -32,6 +31,39 @@
       </div>
     </div>
   </div>
+  <div class="col-md-12 column">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" *ngIf="page > 0; else previous">
+        <a class="page-link"
+           [routerLink] ="['/books']"
+           [queryParams]="{
+          page: page - 1,
+          size: size
+        }">
+          Previous
+        </a>
+      </li>
+      <li class="page-item" *ngIf="books$.length == size; else next">
+        <a class="page-link"
+           [routerLink] ="['/books']"
+           [queryParams]="{
+          page: page + 1,
+          size: size
+        }">
+          Next
+        </a>
+      </li>
+      <ng-template #previous>
+        <li class="page-item  disabled"><a class="page-link">Previous</a></li>
+      </ng-template>
+      <ng-template #next>
+        <li class="page-item  disabled">
+          <a class="page-link">
+            Next
+          </a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
 </div>
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
 

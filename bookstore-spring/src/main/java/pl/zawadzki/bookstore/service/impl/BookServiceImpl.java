@@ -1,6 +1,9 @@
 package pl.zawadzki.bookstore.service.impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,8 +36,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Transactional(readOnly = true)
-    public List<Book> getAll(){
-        return bookRepository.findAll();
+    public List<Book> getAll(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Book> bookPage = bookRepository.findAll(pageable);
+        List<Book> books = bookPage.getContent();
+        return books;
     }
 
     @Transactional(readOnly = true)

@@ -22,8 +22,9 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/all")
-    public ResponseEntity<Iterable<Book>> getAllBooks(){
-        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAll());
+    public ResponseEntity<Iterable<Book>> getAllBooks(@RequestParam(defaultValue = "0") int page,
+                                                      @RequestParam(defaultValue = "6") int size){
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAll(page,size));
     }
 
     @GetMapping("/byAuthor/{author}")
