@@ -4,13 +4,15 @@ import {HomeComponent} from "./modules/pages/home/home.component";
 import {BooksComponent} from "./modules/pages/books/books.component";
 import {CartComponent} from "./modules/pages/cart/cart.component";
 import {UserpageComponent} from "./modules/pages/userpage/userpage.component";
+import {PageNotFoundComponent} from "./modules/pages/page-not-found/page-not-found.component";
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'books', component: BooksComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'user', component: UserpageComponent}
+  {path: 'user', component: UserpageComponent},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

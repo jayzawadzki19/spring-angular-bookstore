@@ -20,6 +20,7 @@ import {CookieService} from "ngx-cookie-service";
 import {HttpInterceptorService} from "./core/interceptors/http/http-interceptor.service";
 import { CartComponent } from './modules/pages/cart/cart.component';
 import { UserpageComponent } from './modules/pages/userpage/userpage.component';
+import { PageNotFoundComponent } from './modules/pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { UserpageComponent } from './modules/pages/userpage/userpage.component';
     BooksComponent,
     FooterComponent,
     CartComponent,
-    UserpageComponent
+    UserpageComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
