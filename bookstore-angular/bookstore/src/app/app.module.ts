@@ -22,6 +22,7 @@ import { CartComponent } from './modules/pages/cart/cart.component';
 import { UserpageComponent } from './modules/pages/userpage/userpage.component';
 import { PageNotFoundComponent } from './modules/pages/page-not-found/page-not-found.component';
 import { CheckoutComponent } from './modules/pages/checkout/checkout.component';
+import { OrdersComponent } from './modules/pages/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CheckoutComponent } from './modules/pages/checkout/checkout.component';
     CartComponent,
     UserpageComponent,
     PageNotFoundComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

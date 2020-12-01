@@ -1,0 +1,66 @@
+<div class="orders-body">
+  <table class="table-responsive">
+    <thead>
+    <tr>
+      <th scope="col">Orders</th>
+      <th scope="col">Order Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th>
+        <table class="table-striped table">
+          <thead>
+          <tr>
+            <th scope="col">Order Id</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Final Price</th>
+            <th scope="col">Finished</th>
+            <th scope="col">Details</th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let order of orders$">
+            <tr>
+              <th>{{order.orderId}}</th>
+              <th>{{order.createdAt}}</th>
+              <th>${{order.finalPrice}}</th>
+              <th>{{order.finished}}</th>
+              <th>
+                <button class="btn show btn-lg btn-outline-primary" (click)=getDetails(order.orderId)>Show</button>
+              </th>
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </th>
+      <th>
+        <div *ngIf="showInfo" class="details">
+          <table class="detailsTable">
+            <tbody>
+            <tr class="orderDetails">
+              <th>
+                <p>Order Id: {{orderDetails.orderId}}</p>
+                <p>Created at: {{orderDetails.createdAt}}</p>
+                <p>Final Price: ${{orderDetails.finalPrice}}</p>
+                <p>Buyer Username: {{orderDetails.buyerUsername}}</p>
+                <p>Buyer Email: {{orderDetails.buyerEmail}}</p>
+                <p>Buyer Phone: {{orderDetails.buyerPhone}}</p>
+                <p>Buyer Address: {{orderDetails.buyerAddress}}</p>
+              </th>
+              <th class="booksDetails">
+                <p>Books</p>
+                <ng-container *ngFor="let item of orderDetails.cartItems">
+                  <p>Title: {{item.bookTitle}} Price: {{item.price}} Quantity: {{item.quantity}}</p>
+                </ng-container>
+              </th>
+            </tr>
+            <button class="btn close btn-lg btn-outline-primary" (click)=close()>Close</button>
+            </tbody>
+          </table>
+        </div>
+      </th>
+    </tr>
+    </tbody>
+  </table>
+</div>
