@@ -50,4 +50,3 @@ Then run `ng serve`
 
 Frontend client is running on [localhost:4200]
 
-## Still in development
