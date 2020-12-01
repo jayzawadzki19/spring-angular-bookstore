@@ -37,4 +37,12 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
+  checkout() {
+    this.cartService.checkout().subscribe(data => {
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
 }

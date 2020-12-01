@@ -31,7 +31,7 @@ export class CartService {
         Authorization: this.localStorage.retrieve('token')
       })
     };
-    return this.httpClient.get('http://localhost:8080/api/cart',httpHeaders);
+    return this.httpClient.get('http://localhost:8080/api/cart', httpHeaders);
   }
 
   removeItem(id: number): Observable<any> {
@@ -44,4 +44,13 @@ export class CartService {
     return this.httpClient.delete(`http://localhost:8080/api/cart/remove/${id}`, httpHeaders);
   }
 
+  checkout(): Observable<any> {
+    const httpHeaders = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: this.localStorage.retrieve('token')
+      })
+    };
+    return this.httpClient.get('http://localhost:8080/api/cart/checkout', httpHeaders)
+  }
 }

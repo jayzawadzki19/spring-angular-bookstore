@@ -29,7 +29,16 @@
         </tbody>
       </table>
       <p>Full price: ${{fullPrice | number:'1.2-2'}}</p>
-      <a routerLink="/orders" class="btn proceed btn-lg btn-outline-primary" >Proceed</a>
+      <a *ngIf="user.address != null && user.phone != null; else offBlock"
+         routerLink="/orders" class="btn proceed btn-lg btn-outline-primary" (click)="checkout()" >
+        Proceed
+      </a>
+      <ng-template #offBlock>
+        <a class="btn proceed btn-lg btn-outline-primary disabled"
+           ngbTooltip="Fill the gaps in Your profile" placement="bottom" [openDelay]="300" [closeDelay]="500">
+          Proceed
+        </a>
+      </ng-template>
     </th>
     <th>
       <p>Username: {{user.username}}</p>
