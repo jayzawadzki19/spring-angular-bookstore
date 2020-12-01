@@ -3,12 +3,12 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CartDTO} from "./cartDTO";
 import {Observable} from "rxjs";
 import {LocalStorageService} from "ngx-webstorage";
+import {CartItem} from "../../../shared/model/cartItem/cart-item";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-
 
   constructor(private httpClient: HttpClient, private localStorage: LocalStorageService) {
 
@@ -43,4 +43,5 @@ export class CartService {
     };
     return this.httpClient.delete(`http://localhost:8080/api/cart/remove/${id}`, httpHeaders);
   }
+
 }

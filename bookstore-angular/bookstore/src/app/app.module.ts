@@ -21,6 +21,7 @@ import {HttpInterceptorService} from "./core/interceptors/http/http-interceptor.
 import { CartComponent } from './modules/pages/cart/cart.component';
 import { UserpageComponent } from './modules/pages/userpage/userpage.component';
 import { PageNotFoundComponent } from './modules/pages/page-not-found/page-not-found.component';
+import { CheckoutComponent } from './modules/pages/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PageNotFoundComponent } from './modules/pages/page-not-found/page-not-f
     FooterComponent,
     CartComponent,
     UserpageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

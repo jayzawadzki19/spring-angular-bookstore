@@ -21,11 +21,11 @@
       <span class="icons">
         <div *ngIf="getUsername() == null; else elseBlock">
           <a routerLink="/search"><img src="../../../../assets/icons/loupe.svg" class="search"></a>
-          <a routerLink="/">
+          <a>
             <img src="../../../../assets/icons/shop.svg" class="cart"
                  ngbTooltip="You must log in to see cart." placement="left" [openDelay]="300" [closeDelay]="500">
           </a>
-          <a routerLink="/">
+          <a>
             <img src="../../../../assets/icons/avatar.svg" class="user"
                  ngbTooltip="You must log in to see your profile." placement="left" [openDelay]="300" [closeDelay]="500">
           </a>

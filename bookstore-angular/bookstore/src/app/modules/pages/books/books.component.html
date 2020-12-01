@@ -33,7 +33,7 @@
   </div>
   <div class="col-md-12 column">
     <ul class="pagination justify-content-center">
-      <li class="page-item" *ngIf="page > 0; else previous">
+      <li class="page-item" *ngIf="page > 1; else previous">
         <a class="page-link"
            [routerLink] ="['/books']"
            [queryParams]="{

@@ -15,7 +15,7 @@ import {ActivatedRoute} from "@angular/router";
 export class BooksComponent implements OnInit, OnDestroy {
 
   books$: Array<BookModel> = [];
-  page: number = 0;
+  page: number = 1;
   size: number = 6;
   cartDTO: CartDTO;
   cartForm: FormGroup;
@@ -56,7 +56,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     }
   }
 
-  getBooks(page: number = 0, size: number = 6) {
+  getBooks(page: number = 1, size: number = 6) {
     this.bookService.getAllBooks(page, size).subscribe(book => {
       this.books$ = book;
       this.page = page;

@@ -31,4 +31,7 @@
   <div *ngIf="cart$.length == 0 && isLogged" class="alert alert-info">
     No books in cart...
   </div>
+  <div class="checkout" *ngIf="cart$.length != 0">
+    <a routerLink="/checkout" class="btn checkoutBtn btn-lg btn-outline-primary" >Checkout</a>
+  </div>
 </div>
