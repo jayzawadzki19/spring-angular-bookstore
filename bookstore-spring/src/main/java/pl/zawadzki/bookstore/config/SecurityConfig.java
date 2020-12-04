@@ -14,13 +14,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-
+/**
+ * Provides Security configuration for application
+ * Creates instance of WebSecurityConfigurerAdapter
+ * @see org.springframework.security.config.annotation.web.WebSecurityConfigurer
+ * */
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
+    /**
+     * Configures HttpSecurity. Describes endpoints for different user roles.
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -48,12 +57,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-
+    /**
+     * Builds in memory authentication using implemented password encoder.
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(encoder());
     }
+
 
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
@@ -61,11 +75,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * Creates Bean of PasswordEncoder
+     * @return
+     */
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(10);
     }
 
+    /**
+     * Sets filter for cors configuration. Configures allowed methods and headers.
+     * @return
+     */
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

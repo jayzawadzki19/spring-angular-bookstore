@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private CurrentUserService currentUserService;
     private UserRepository repository;
-    private  PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
 
     @Autowired
@@ -30,10 +30,20 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public User getUserInfo(){
+    /**
+     * Returns information about user
+     *
+     * @return {@link User}
+     */
+    public User getUserInfo() {
         return currentUserService.getCurrentUser();
     }
 
+    /**
+     * Updates {@link User} information.
+     *
+     * @param userDto {@link UserDto}
+     */
     public void updateUserInfo(UserDto userDto) {
         User updateUser = currentUserService.getCurrentUser();
         updateUser.setUsername(userDto.getUsername());
@@ -43,9 +53,15 @@ public class UserServiceImpl implements UserService {
         repository.save(updateUser);
     }
 
+    /**
+     * Updates {@link User} password.
+     *
+     * @param passwordDto {@link PasswordDto}
+     * @return true if success false if not.
+     */
     public boolean changePassword(PasswordDto passwordDto) {
         User updateUser = currentUserService.getCurrentUser();
-        if(passwordEncoder.matches(passwordDto.getOldPassword(),updateUser.getPassword())){
+        if (passwordEncoder.matches(passwordDto.getOldPassword(), updateUser.getPassword())) {
             String encodedNewPassword = passwordEncoder.encode(passwordDto.getNewPassword());
             updateUser.setPassword(encodedNewPassword);
             repository.save(updateUser);

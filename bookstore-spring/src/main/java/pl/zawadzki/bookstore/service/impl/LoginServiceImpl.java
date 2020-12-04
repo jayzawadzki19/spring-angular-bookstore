@@ -16,9 +16,15 @@ public class LoginServiceImpl implements LoginService {
 
     private final AuthenticationManager authenticationManager;
 
-    public LoginResponse login(LoginRequest loginRequest){
+    /**
+     * Authenticates {@link pl.zawadzki.bookstore.model.User} with {@link LoginRequest}
+     *
+     * @param loginRequest {@link LoginRequest}
+     * @return {@link LoginResponse}
+     */
+    public LoginResponse login(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new LoginResponse(loginRequest.getUsername());
     }

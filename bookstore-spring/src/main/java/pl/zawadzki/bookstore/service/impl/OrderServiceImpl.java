@@ -21,7 +21,13 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final CurrentUserService currentUserService;
 
-
+    /**
+     * Returns List of all existing Orders.
+     *
+     * @param page {@link Integer} number of page
+     * @param size {@link Integer} elements on one page
+     * @return {@link List} of {@link Order}
+     */
     public List<Order> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Order> orderPage = orderRepository.findAll(pageable);
@@ -29,14 +35,27 @@ public class OrderServiceImpl implements OrderService {
         return orders;
     }
 
+    /**
+     * Returns {@link Order} with specified Id number.
+     *
+     * @param id {@link Long}
+     * @return {@link Order}
+     */
     public Order getById(Long id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
-        if (optionalOrder.isEmpty()){
+        if (optionalOrder.isEmpty()) {
             throw new OrderException("Order was not found...");
         }
         return optionalOrder.get();
     }
 
+    /**
+     * Returns List of all existing {@link pl.zawadzki.bookstore.model.User} Orders.
+     *
+     * @param page {@link Integer} number of page
+     * @param size {@link Integer} elements on one page
+     * @return {@link List} of {@link Order}
+     */
     public List<Order> getAllByUsername(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Order> orders = orderRepository

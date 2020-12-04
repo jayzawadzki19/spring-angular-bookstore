@@ -20,8 +20,14 @@ public class RegisterServiceImpl implements RegisterService {
     private final CartRepository cartRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public ResponseEntity<String> signUp(RegisterRequest registerRequest){
-        if(userExist(registerRequest)){
+    /**
+     * Creates new {@link pl.zawadzki.bookstore.model.User} from passed {@link RegisterRequest}
+     *
+     * @param registerRequest {@link RegisterRequest}
+     * @return {@link ResponseEntity} with {@link String}
+     */
+    public ResponseEntity<String> signUp(RegisterRequest registerRequest) {
+        if (userExist(registerRequest)) {
             return new ResponseEntity<>("User already exists", HttpStatus.CONFLICT);
         }
         User user = new User();
@@ -34,13 +40,19 @@ public class RegisterServiceImpl implements RegisterService {
         return new ResponseEntity<>("Registration Successful", HttpStatus.OK);
     }
 
-    private boolean userExist(RegisterRequest registerRequest){
+    /**
+     * Checks if User already exists
+     */
+    private boolean userExist(RegisterRequest registerRequest) {
         return
                 userRepository.existsByUsername(registerRequest.getUsername())
-                || userRepository.existsByEmail(registerRequest.getEmail());
+                        || userRepository.existsByEmail(registerRequest.getEmail());
     }
 
-    private void createCartForUser(User user){
+    /**
+     * Creates new Cart for User
+     */
+    private void createCartForUser(User user) {
         Cart cart = new Cart();
         cart.setUser(user);
         cartRepository.save(cart);

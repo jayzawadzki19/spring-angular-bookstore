@@ -15,13 +15,19 @@ public class CurrentUserServiceImpl implements CurrentUserService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Returns current logged {@link User}
+     *
+     * @return {@link User}
+     * @throws org.springframework.security.core.userdetails.UsernameNotFoundException
+     */
     @Transactional(readOnly = true)
-    public User getCurrentUser(){
+    public User getCurrentUser() {
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User)
                         SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         return userRepository.getByUsername(principal.getUsername())
-                .orElseThrow(()-> new UsernameNotFoundException("User " + principal.getUsername() + " not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User " + principal.getUsername() + " not found"));
     }
 }

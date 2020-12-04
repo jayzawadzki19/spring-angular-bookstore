@@ -20,6 +20,9 @@ import pl.zawadzki.bookstore.service.CurrentUserService;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Provides methods for Cart management.
+ */
 @Service
 @AllArgsConstructor
 public class CartServiceImpl implements CartService {
@@ -30,6 +33,12 @@ public class CartServiceImpl implements CartService {
     private final CurrentUserService currentUserService;
     private final OrderRepository orderRepository;
 
+    /**
+     * Add {@link pl.zawadzki.bookstore.model.CartItem} to {@link Cart}.
+     * Creates CartItem object from {@link CartItemDto}
+     *
+     * @param cartItemDto {@link CartItemDto}
+     */
     @Transactional
     public void addToCart(CartItemDto cartItemDto) {
         var book = bookRepository.getBookByBookId(cartItemDto.getBookId());
@@ -67,10 +76,20 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(finalCart);
     }
 
+    /**
+     * Returns user's {@link Cart}
+     *
+     * @return {@link Cart}
+     */
     public Cart getCart() {
         return currentUserService.getCurrentUser().getCart();
     }
 
+    /**
+     * Removes {@link pl.zawadzki.bookstore.model.CartItem} from {@link Cart}.
+     *
+     * @param cartItemDto
+     */
     @Transactional
     public void removeFromCart(CartItemDto cartItemDto) {
         Optional<CartItem> optionalCartItem = cartItemRepository.getCartItemByBookId(cartItemDto.getBookId());
@@ -83,7 +102,9 @@ public class CartServiceImpl implements CartService {
 
     }
 
-    /** The checkout() method creates Order for current User from User's current Cart status. */
+    /**
+     * Creates {@link pl.zawadzki.bookstore.model.Order} for current {@link pl.zawadzki.bookstore.model.User} from User's current Cart status.
+     */
     @Transactional
     public void checkout() {
         Order order = new Order(currentUserService.getCurrentUser());

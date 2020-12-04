@@ -23,34 +23,35 @@ public class BookController {
 
     @GetMapping("/all")
     public ResponseEntity<Iterable<Book>> getAllBooks(@RequestParam(defaultValue = "1") int page,
-                                                      @RequestParam(defaultValue = "6") int size){
-        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAll(page - 1,size));
+                                                      @RequestParam(defaultValue = "6") int size) {
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAll(page - 1, size));
     }
 
     @GetMapping("/byAuthor/{author}")
-    public ResponseEntity<List<Book>> getAllByAuthor(@PathVariable String author){
+    public ResponseEntity<List<Book>> getAllByAuthor(@PathVariable String author) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllByAuthor(author));
     }
 
     @GetMapping("/byTitle/{title}")
-    public ResponseEntity<Book> getByTitle(@PathVariable String title){
+    public ResponseEntity<Book> getByTitle(@PathVariable String title) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.getByTitle(title));
     }
 
     @PostMapping("/add")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<String> addBook(@Valid @RequestBody Book book){
+    public ResponseEntity<String> addBook(@Valid @RequestBody Book book) {
         return bookService.addBook(book);
     }
 
 
     //Exceptions
     @ExceptionHandler(AuthorNotFoundException.class)
-    public ResponseEntity catchAuthorException(AuthorNotFoundException e){
+    public ResponseEntity catchAuthorException(AuthorNotFoundException e) {
         return ResponseEntity.badRequest().header("Info ", e.getMessage()).build();
     }
+
     @ExceptionHandler(BookNotFoundException.class)
-    public ResponseEntity catchBookException(BookNotFoundException e){
+    public ResponseEntity catchBookException(BookNotFoundException e) {
         return ResponseEntity.badRequest().header("Info ", e.getMessage()).build();
     }
 

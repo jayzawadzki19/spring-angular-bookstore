@@ -39,14 +39,14 @@ public class CartController {
     }
 
     @GetMapping("/checkout")
-    public ResponseEntity checkout(){
+    public ResponseEntity checkout() {
         cartService.checkout();
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 
     @ExceptionHandler(BookNotFoundException.class)
-    public ResponseEntity catchBookException(BookNotFoundException e){
+    public ResponseEntity catchBookException(BookNotFoundException e) {
         return ResponseEntity.badRequest().header("Info ", e.getMessage()).build();
     }
 
